@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import './styles/global.css';
+import Navbar from './components/Navbar';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -15,12 +18,16 @@ const App = () => {
   };
 
   return (
-    <div>
+    <Router>
+      <Navbar />
       <button onClick={toggleDarkMode} className="toggle-darkmode">
         {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
-      <Dashboard />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 
